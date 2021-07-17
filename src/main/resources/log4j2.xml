@@ -2,7 +2,7 @@
 <Configuration status="info" name="spring-boot-kafka-log" packages="com.techboss">
     <Appenders>
       <Kafka name="Kafka" topic="log-test">
-            <PatternLayout pattern="spring-elk %highlight{%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5p %C{36}.%M - %m%n}"/>
+            <PatternLayout pattern="spring-elk %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-4p %C{3.}.%M - %m%n%ex"/>
             <Property name="bootstrap.servers">localhost:9092</Property>
         </Kafka>
         <Async name="Async">
@@ -10,7 +10,8 @@
         </Async>
 
         <Console name="stdout" target="SYSTEM_OUT">
-            <PatternLayout pattern="spring-elk %highlight{%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5p %C{36}.%M - %m%n%ex}"/>
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} %style{[%t]}{magenta} %highlight{%-4p}{INFO=green bold,WARN=yellow bold,ERROR=red blink} %style{%C{3}}{cyan}.%M - %m%n%throwable"
+            disableAnsi="false"/>
         </Console>
 
     </Appenders>
